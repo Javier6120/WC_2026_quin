@@ -1,0 +1,11 @@
+# Virtual environment
+venv_worldcup/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Info
+.env
+credentials.json
+

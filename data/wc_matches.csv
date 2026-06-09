@@ -1,0 +1,73 @@
+forms_match_id,home_team,away_team
+A1,Mexico,South Africa
+A2,South Korea,Czechia
+A3,Czechia,South Africa
+A4,Mexico,South Korea
+A5,Czechia,Mexico
+A6,South Africa,South Korea
+B1,Canada,Bosnia-Herzegovina
+B2,Qatar,Switzerland
+B3,Switzerland,Bosnia-Herzegovina
+B4,Canada,Qatar
+B5,Bosnia-Herzegovina,Qatar
+B6,Switzerland,Canada
+C1,Brazil,Morocco
+C2,Haiti,Scotland
+C3,Scotland,Morocco
+C4,Brazil,Haiti
+C5,Morocco,Haiti
+C6,Scotland,Brazil
+D1,United States,Paraguay
+D2,Australia,Turkey
+D3,United States,Australia
+D4,Turkey,Paraguay
+D5,Paraguay,Australia
+D6,Turkey,United States
+E1,Germany,Curaçao
+E2,Ivory Coast,Ecuador
+E3,Germany,Ivory Coast
+E4,Ecuador,Curaçao
+E5,Curaçao,Ivory Coast
+E6,Ecuador,Germany
+F1,Netherlands,Japan
+F2,Sweden,Tunisia
+F3,Netherlands,Sweden
+F4,Tunisia,Japan
+F5,Japan,Sweden
+F6,Tunisia,Netherlands
+G1,Belgium,Egypt
+G2,Iran,New Zealand
+G3,Belgium,Iran
+G4,New Zealand,Egypt
+G5,Egypt,Iran
+G6,New Zealand,Belgium
+H1,Spain,Cape Verde Islands
+H2,Saudi Arabia,Uruguay
+H3,Spain,Saudi Arabia
+H4,Uruguay,Cape Verde Islands
+H5,Cape Verde Islands,Saudi Arabia
+H6,Uruguay,Spain
+I1,France,Senegal
+I2,Iraq,Norway
+I3,France,Iraq
+I4,Norway,Senegal
+I5,Norway,France
+I6,Senegal,Iraq
+J1,Argentina,Algeria
+J2,Austria,Jordan
+J3,Argentina,Austria
+J4,Jordan,Algeria
+J5,Algeria,Austria
+J6,Jordan,Argentina
+K1,Portugal,Congo DR
+K2,Uzbekistan,Colombia
+K3,Portugal,Uzbekistan
+K4,Colombia,Congo DR
+K5,Colombia,Portugal
+K6,Congo DR,Uzbekistan
+L1,England,Croatia
+L2,Ghana,Panama
+L3,England,Ghana
+L4,Panama,Croatia
+L5,Croatia,Ghana
+L6,Panama,England
