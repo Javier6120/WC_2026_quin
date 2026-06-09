@@ -1,6 +1,6 @@
 import pandas as pd, sqlalchemy, requests
 from database import engine
-from config import token_1
+from config import token_1, DATA_DIR
 
 def extract():
     # Requests matches to Football-Data API
@@ -10,7 +10,7 @@ def extract():
     api_matches_df= pd.json_normalize(data=json_data['matches'])
 
     # Reads CSV with matches, mapped to forms_match_id's
-    file_matches_df = pd.read_csv('wc_matches.csv')
+    file_matches_df = pd.read_csv(DATA_DIR/'wc_matches.csv')
     return api_matches_df, file_matches_df
 
 

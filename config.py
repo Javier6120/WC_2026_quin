@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 import os
+from pathlib import Path
 
 load_dotenv()
 
@@ -11,3 +12,9 @@ db_password = os.getenv("DB_PASSWORD")
 
 token_1 = os.getenv("API_TOKEN_FOOTBALL")
 sheet_id = os.getenv("SHEET_ID")
+
+
+PROJECT_ROOT = Path(__file__).resolve().parent
+DATA_DIR = PROJECT_ROOT / 'data'
+SQL_DIR = PROJECT_ROOT / 'sql'
+CREDENTIALS_DIR = PROJECT_ROOT / 'credentials'

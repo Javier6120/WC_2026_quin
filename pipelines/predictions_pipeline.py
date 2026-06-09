@@ -2,16 +2,14 @@ from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
 import pandas as pd, sqlalchemy 
 from database import engine
-from config import sheet_id
-
-pd.set_option('display.max_rows',None)
+from config import sheet_id, DATA_DIR, CREDENTIALS_DIR
 
 def extract(): 
     # Google Services Presmissions
     SCOPES = ["https://www.googleapis.com/auth/spreadsheets.readonly"]
 
     # Authentication
-    creds = Credentials.from_service_account_file('credentials.json', scopes=SCOPES)
+    creds = Credentials.from_service_account_file(CREDENTIALS_DIR/'credentials.json', scopes=SCOPES)
     service = build("sheets", "v4", credentials=creds)
 
     # API Request
@@ -20,7 +18,7 @@ def extract():
     predictions_DF = pd.DataFrame(form_entries['values'][1:], columns=form_entries['values'][0])
 
     # Read CSV with team names translations (eng-spa)
-    translation_df = pd.read_csv('wc_teams.csv')
+    translation_df = pd.read_csv(DATA_DIR/'wc_teams.csv')
     return predictions_DF,translation_df
 
 
@@ -29,6 +27,7 @@ def transform(predictions_df, teams_df):
     predictions_df['Nombre'] = predictions_df['Nombre'].str.strip()
     predictions_df.rename(columns={'Nombre':'participant'}, inplace=True)
     predictions_df.drop(columns=['Marca temporal'],inplace=True)
+
     # Melt columns to forms_match_id
     predictions_df = predictions_df.melt(id_vars='participant',
                                          var_name='forms_match_id',
@@ -51,6 +50,7 @@ def transform(predictions_df, teams_df):
                               how='right').drop(columns=['participant','name'])
     
     return predictions_df, participants_df
+
 
 def load(predictions_df, participants_df):
     with engine.begin() as conn:
