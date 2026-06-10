@@ -3,7 +3,7 @@ from database import engine
 
 def transform():
      q1 = '''  WITH outcomes AS(
-               SELECT forms_match_id, home_team, away_team,
+               SELECT forms_match_id, home_team, away_team, date,
                      CASE WHEN result = 'DRAW' THEN 'Draw'
                      WHEN result = 'HOME_TEAM' THEN home_team
                      WHEN result = 'AWAY_TEAM' THEN away_team
@@ -13,7 +13,7 @@ def transform():
                pointed AS(
                     SELECT participant_id, 
                            home_team || ' vs ' || away_team AS match_name,
-                           eng_pred,
+                           eng_pred,spa_pred, date,
                            outcome,
                            CASE WHEN eng_pred = outcome THEN 1
                                 ELSE 0 END AS points
@@ -21,7 +21,7 @@ def transform():
                     LEFT JOIN outcomes as out 
                     ON pred.forms_match_id = out.forms_match_id)
 
-               SELECT p.participant_id, name, match_name, eng_pred, outcome, points
+               SELECT p.participant_id, name, match_name, eng_pred, spa_pred, outcome, points, date
                FROM pointed as p
                LEFT JOIN participants AS part 
                ON p.participant_id = part.participant_id

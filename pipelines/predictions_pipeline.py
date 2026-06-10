@@ -25,6 +25,7 @@ def extract():
 def transform(predictions_df, teams_df):
     # Cleaning
     predictions_df['Nombre'] = predictions_df['Nombre'].str.strip()
+    predictions_df['Nombre'] = predictions_df['Nombre'].str.title()
     predictions_df.rename(columns={'Nombre':'participant'}, inplace=True)
     predictions_df.drop(columns=['Marca temporal'],inplace=True)
 
@@ -35,10 +36,10 @@ def transform(predictions_df, teams_df):
     predictions_df = pd.merge(predictions_df,teams_df,
                               left_on='pred',
                               right_on='spa_team',
-                              how='left').drop(columns=['spa_team','pred'])
-    
+                              how='left').drop(columns=['spa_team'])
+   
     predictions_df['eng_team'] = predictions_df['eng_team'].fillna('Draw')
-    predictions_df.rename(columns={'eng_team':'eng_pred'}, inplace=True)
+    predictions_df.rename(columns={'eng_team':'eng_pred', 'pred':'spa_pred'}, inplace=True)
 
     # Assign id to each participant
     participants_df = pd.DataFrame(predictions_df['participant'].unique(),columns=['name'])
@@ -48,7 +49,7 @@ def transform(predictions_df, teams_df):
                               left_on='name',
                               right_on='participant',
                               how='right').drop(columns=['participant','name'])
-    
+
     return predictions_df, participants_df
 
 
