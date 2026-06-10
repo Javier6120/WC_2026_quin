@@ -12,7 +12,7 @@ from database import engine
 st.title("🏆 Mundial Quiniela Familia Vega")
 leaderboard_df = pd.read_sql(""" SELECT * FROM leaderboard  ORDER BY total_points DESC""",engine)
 leaderboard_df.index = range(1, len(leaderboard_df) + 1)
-st.dataframe(leaderboard_df)
+st.table(leaderboard_df)
 
 # Leader
 col1, col2 = st.columns(2)
@@ -20,11 +20,14 @@ col1.metric("Participantes", len(leaderboard_df))
 col2.metric("Líder", leaderboard_df.iloc[0]["name"])
 
 # Predictions by Participants
-pred_df = pd.read_sql("""SELECT name AS nombre, match_name AS partido, 
-                                spa_pred AS predicción, outcome AS resultado, 
+pred_df = pd.read_sql("""SELECT date, name AS nombre, match_name AS partido, 
+                                spa_pred AS predicción, outcome AS resultado,
                                 points AS puntos 
                                 FROM scored
                                 ORDER BY date""",engine)
+pred_df['date'] = (pd.to_datetime(pred_df['date'], utc=True)
+                   .dt.tz_convert("America/Mexico_City")
+                   .dt.strftime("%Y-%m-%d  |  %H:%M"))
 participant = st.selectbox("Selecciona un participante", sorted(pred_df["nombre"].unique()))
 participant_predictions = pred_df[pred_df["nombre"] == participant]
 st.subheader(f"⚽ Predicciones de {participant}")
