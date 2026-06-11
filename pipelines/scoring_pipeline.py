@@ -11,17 +11,16 @@ def transform():
                FROM matches),
 
                pointed AS(
-                    SELECT participant_id, 
-                           home_team || ' vs ' || away_team AS match_name,
-                           eng_pred,spa_pred, date,
-                           outcome,
+                    SELECT out.forms_match_id, participant_id, home_team, away_team,
+                           eng_pred,spa_pred, date, outcome,
                            CASE WHEN eng_pred = outcome THEN 1
                                 ELSE 0 END AS points
                     FROM predictions as pred 
                     LEFT JOIN outcomes as out 
                     ON pred.forms_match_id = out.forms_match_id)
 
-               SELECT p.participant_id, name, match_name, eng_pred, spa_pred, outcome, points, date
+               SELECT p.forms_match_id, p.participant_id, name, home_team, away_team, 
+                      eng_pred, spa_pred, outcome, points, date
                FROM pointed as p
                LEFT JOIN participants AS part 
                ON p.participant_id = part.participant_id
