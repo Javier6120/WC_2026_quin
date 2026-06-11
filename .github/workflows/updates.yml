@@ -1,0 +1,29 @@
+name: Update WC Scores/Leaderboard
+
+on:
+  schedule:
+    - cron: '15 13-23 * 6 *'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13.14'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run update_results
+        run: python -m pipelines.update_results
+
+      - name: Run scoring_pipeline
+        run: python -m pipelines.scoring_pipeline

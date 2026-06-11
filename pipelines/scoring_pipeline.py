@@ -1,4 +1,4 @@
-import pandas as pd, sqlalchemy 
+import pandas as pd
 from database import engine
 
 def transform():

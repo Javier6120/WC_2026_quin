@@ -6,7 +6,7 @@ from config import token_1
 def to_update():
      q1 = '''  SELECT api_match_id AS ids
                FROM matches 
-               WHERE date<=CURRENT_TIMESTAMP + INTERVAL '2 days' 
+               WHERE date<=CURRENT_TIMESTAMP 
                      AND result IS NULL;'''
      to_update = pd.read_sql(q1,engine)
      return(to_update['ids'].tolist())

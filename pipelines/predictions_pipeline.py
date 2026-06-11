@@ -2,7 +2,7 @@ from googleapiclient.discovery import build
 from google.oauth2.service_account import Credentials
 import pandas as pd, sqlalchemy 
 from database import engine
-from config import sheet_id, DATA_DIR, CREDENTIALS_DIR
+from config import sheet_id, DATA_DIR, CREDENTIALS_DIR, NAME_MAP
 
 def extract(): 
     # Google Services Presmissions
@@ -23,9 +23,11 @@ def extract():
 
 
 def transform(predictions_df, teams_df):
+    name_map = NAME_MAP
     # Cleaning
     predictions_df['Nombre'] = predictions_df['Nombre'].str.strip()
     predictions_df['Nombre'] = predictions_df['Nombre'].str.title()
+    predictions_df['Nombre'] = predictions_df['Nombre'].replace(name_map)
     predictions_df.rename(columns={'Nombre':'participant'}, inplace=True)
     predictions_df.drop(columns=['Marca temporal'],inplace=True)
 
