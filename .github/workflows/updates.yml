@@ -10,18 +10,18 @@ jobs:
     runs-on: ubuntu-latest
 
     env: 
-      token_1: ${{ secrets.API_TOKEN_FOOTBALL }}
-      db_host: ${{ secrets.DB_HOST }}
-      db_name: ${{ secrets.DB_NAME }}
-      db_password: ${{ secrets.DB_PASSWORD }}
-      db_port: ${{ secrets.DB_PORT }}
-      db_user: ${{ secrets.DB_USER }}
-      name_map: ${{ secrets.NAME_MAP }}
-      neon_host: ${{ secrets.NEON_HOST }}
-      neon_pw: ${{ secrets.NEON_PASSWORD }}
-      neon_port: ${{ secrets.NEON_PORT }}
-      neon_user: ${{ secrets.NEON_USER }}
-      sheet_id: ${{ secrets.SHEET_ID }}
+      API_TOKEN_FOOTBALL: ${{ secrets.API_TOKEN_FOOTBALL }}
+      DB_HOST: ${{ secrets.DB_HOST }}
+      DB_NAME: ${{ secrets.DB_NAME }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      DB_PORT: ${{ secrets.DB_PORT }}
+      DB_USER: ${{ secrets.DB_USER }}
+      NAME_MAP: ${{ secrets.NAME_MAP }}
+      NEON_HOST: ${{ secrets.NEON_HOST }}
+      NEON_PASSWORD: ${{ secrets.NEON_PASSWORD }}
+      NEON_PORT: ${{ secrets.NEON_PORT }}
+      NEON_USER: ${{ secrets.NEON_USER }}
+      SHEET_ID: ${{ secrets.SHEET_ID }}
 
     steps:
       - name: Checkout repo
