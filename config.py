@@ -18,7 +18,7 @@ neon_pw = os.getenv("NEON_PASSWORD")
 token_1 = os.getenv("API_TOKEN_FOOTBALL")
 sheet_id = os.getenv("SHEET_ID")
 
-NAME_MAP = json.loads(os.getenv("NAME_MAP"))
+name_map = json.loads(os.getenv("NAME_MAP"))
 
 PROJECT_ROOT = Path(__file__).resolve().parent
 DATA_DIR = PROJECT_ROOT / 'data'

@@ -9,6 +9,20 @@ jobs:
   update:
     runs-on: ubuntu-latest
 
+    env: 
+      token_1: ${{ secrets.API_TOKEN_FOOTBALL }}
+      db_host: ${{ secrets.DB_HOST }}
+      db_name: ${{ secrets.DB_NAME }}
+      db_password: ${{ secrets.DB_PASSWORD }}
+      db_port: ${{ secrets.DB_PORT }}
+      db_user: ${{ secrets.DB_USER }}
+      name_map: ${{ secrets.NAME_MAP }}
+      neon_host: ${{ secrets.NEON_HOST }}
+      neon_pw: ${{ secrets.NEON_PASSWORD }}
+      neon_port: ${{ secrets.NEON_PORT }}
+      neon_user: ${{ secrets.NEON_USER }}
+      sheet_id: ${{ secrets.SHEET_ID }}
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
