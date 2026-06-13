@@ -5,7 +5,8 @@ CREATE TABLE participants(
 
 DROP TABLE IF EXISTS matches CASCADE;
 CREATE TABLE matches(
-	forms_match_id VARCHAR(3) PRIMARY KEY,
+	forms_match_id VARCHAR(4) PRIMARY KEY,
+	stage VARCHAR(50) NOT NULL,
 	home_team VARCHAR(50) NOT NULL,
 	away_team VARCHAR(50) NOT NULL,
 	api_match_id INTEGER UNIQUE NOT NULL,

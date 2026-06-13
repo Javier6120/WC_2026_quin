@@ -4,7 +4,6 @@ import sys
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.append(str(PROJECT_ROOT))
 
-
 import streamlit as st, pandas as pd, plotly.express as px 
 from database import engine
 
@@ -18,16 +17,17 @@ leaderboard_df = pd.read_sql(""" SELECT RANK() OVER(ORDER BY total_points DESC) 
 leaderboard_df.index = range(1, len(leaderboard_df) + 1)
 st.table(leaderboard_df)
 
-# Leader
+
+# Number of participantsa and leader name
 col1, col2 = st.columns(2)
 col1.metric("Participantes", len(leaderboard_df))
 col2.metric("Líder", leaderboard_df.iloc[0]["nombre"])
 
-# Predictions by Participants
+
+# Predictions by participant
 pred_df = pd.read_sql("""SELECT date, name AS nombre, forms_match_id as id,
                                 home_team || ' vs ' || away_team AS partido, 
-                                spa_pred AS predicción, outcome AS resultado,
-                                points AS puntos 
+                                spa_pred AS predicción, outcome AS resultado, points AS puntos 
                                 FROM scored
                                 ORDER BY date""",engine)
 pred_df['date'] = (pd.to_datetime(pred_df['date'], utc=True)
@@ -39,7 +39,7 @@ st.subheader(f"⚽ Predicciones de {participant}")
 st.dataframe(participant_predictions, hide_index=True, use_container_width=True)
 
 
-# Map 
+# Map of correct predictions
 heatmap_df = pd.read_sql("""SELECT name AS participante,
                                 forms_match_id as id, points,  
                                 CASE WHEN eng_pred = home_team THEN 'L'
@@ -50,6 +50,7 @@ heatmap_df = pd.read_sql("""SELECT name AS participante,
 pivot_values = heatmap_df.pivot(index='participante',columns='id', values='prediccion')
 pivot_colors = heatmap_df.pivot(index='participante',columns='id', values='points')
 
+# Green color for correct predictions 
 def color_cell(val):
     if val==1: return 'background-color: lightgreen'
     return ''

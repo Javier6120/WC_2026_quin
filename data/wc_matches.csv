@@ -1,73 +1,105 @@
-forms_match_id,home_team,away_team
-A1,Mexico,South Africa
-A2,South Korea,Czechia
-A3,Czechia,South Africa
-A4,Mexico,South Korea
-A5,Czechia,Mexico
-A6,South Africa,South Korea
-B1,Canada,Bosnia-Herzegovina
-B2,Qatar,Switzerland
-B3,Switzerland,Bosnia-Herzegovina
-B4,Canada,Qatar
-B5,Bosnia-Herzegovina,Qatar
-B6,Switzerland,Canada
-C1,Brazil,Morocco
-C2,Haiti,Scotland
-C3,Scotland,Morocco
-C4,Brazil,Haiti
-C5,Morocco,Haiti
-C6,Scotland,Brazil
-D1,United States,Paraguay
-D2,Australia,Turkey
-D3,United States,Australia
-D4,Turkey,Paraguay
-D5,Paraguay,Australia
-D6,Turkey,United States
-E1,Germany,Curaçao
-E2,Ivory Coast,Ecuador
-E3,Germany,Ivory Coast
-E4,Ecuador,Curaçao
-E5,Curaçao,Ivory Coast
-E6,Ecuador,Germany
-F1,Netherlands,Japan
-F2,Sweden,Tunisia
-F3,Netherlands,Sweden
-F4,Tunisia,Japan
-F5,Japan,Sweden
-F6,Tunisia,Netherlands
-G1,Belgium,Egypt
-G2,Iran,New Zealand
-G3,Belgium,Iran
-G4,New Zealand,Egypt
-G5,Egypt,Iran
-G6,New Zealand,Belgium
-H1,Spain,Cape Verde Islands
-H2,Saudi Arabia,Uruguay
-H3,Spain,Saudi Arabia
-H4,Uruguay,Cape Verde Islands
-H5,Cape Verde Islands,Saudi Arabia
-H6,Uruguay,Spain
-I1,France,Senegal
-I2,Iraq,Norway
-I3,France,Iraq
-I4,Norway,Senegal
-I5,Norway,France
-I6,Senegal,Iraq
-J1,Argentina,Algeria
-J2,Austria,Jordan
-J3,Argentina,Austria
-J4,Jordan,Algeria
-J5,Algeria,Austria
-J6,Jordan,Argentina
-K1,Portugal,Congo DR
-K2,Uzbekistan,Colombia
-K3,Portugal,Uzbekistan
-K4,Colombia,Congo DR
-K5,Colombia,Portugal
-K6,Congo DR,Uzbekistan
-L1,England,Croatia
-L2,Ghana,Panama
-L3,England,Ghana
-L4,Panama,Croatia
-L5,Croatia,Ghana
-L6,Panama,England
+forms_match_id,home_team,away_team,stage
+A1,Mexico,South Africa,GROUP_STAGE
+A2,South Korea,Czechia,GROUP_STAGE
+A3,Czechia,South Africa,GROUP_STAGE
+A4,Mexico,South Korea,GROUP_STAGE
+A5,Czechia,Mexico,GROUP_STAGE
+A6,South Africa,South Korea,GROUP_STAGE
+B1,Canada,Bosnia-Herzegovina,GROUP_STAGE
+B2,Qatar,Switzerland,GROUP_STAGE
+B3,Switzerland,Bosnia-Herzegovina,GROUP_STAGE
+B4,Canada,Qatar,GROUP_STAGE
+B5,Bosnia-Herzegovina,Qatar,GROUP_STAGE
+B6,Switzerland,Canada,GROUP_STAGE
+C1,Brazil,Morocco,GROUP_STAGE
+C2,Haiti,Scotland,GROUP_STAGE
+C3,Scotland,Morocco,GROUP_STAGE
+C4,Brazil,Haiti,GROUP_STAGE
+C5,Morocco,Haiti,GROUP_STAGE
+C6,Scotland,Brazil,GROUP_STAGE
+D1,United States,Paraguay,GROUP_STAGE
+D2,Australia,Turkey,GROUP_STAGE
+D3,United States,Australia,GROUP_STAGE
+D4,Turkey,Paraguay,GROUP_STAGE
+D5,Paraguay,Australia,GROUP_STAGE
+D6,Turkey,United States,GROUP_STAGE
+E1,Germany,Curaçao,GROUP_STAGE
+E2,Ivory Coast,Ecuador,GROUP_STAGE
+E3,Germany,Ivory Coast,GROUP_STAGE
+E4,Ecuador,Curaçao,GROUP_STAGE
+E5,Curaçao,Ivory Coast,GROUP_STAGE
+E6,Ecuador,Germany,GROUP_STAGE
+F1,Netherlands,Japan,GROUP_STAGE
+F2,Sweden,Tunisia,GROUP_STAGE
+F3,Netherlands,Sweden,GROUP_STAGE
+F4,Tunisia,Japan,GROUP_STAGE
+F5,Japan,Sweden,GROUP_STAGE
+F6,Tunisia,Netherlands,GROUP_STAGE
+G1,Belgium,Egypt,GROUP_STAGE
+G2,Iran,New Zealand,GROUP_STAGE
+G3,Belgium,Iran,GROUP_STAGE
+G4,New Zealand,Egypt,GROUP_STAGE
+G5,Egypt,Iran,GROUP_STAGE
+G6,New Zealand,Belgium,GROUP_STAGE
+H1,Spain,Cape Verde Islands,GROUP_STAGE
+H2,Saudi Arabia,Uruguay,GROUP_STAGE
+H3,Spain,Saudi Arabia,GROUP_STAGE
+H4,Uruguay,Cape Verde Islands,GROUP_STAGE
+H5,Cape Verde Islands,Saudi Arabia,GROUP_STAGE
+H6,Uruguay,Spain,GROUP_STAGE
+I1,France,Senegal,GROUP_STAGE
+I2,Iraq,Norway,GROUP_STAGE
+I3,France,Iraq,GROUP_STAGE
+I4,Norway,Senegal,GROUP_STAGE
+I5,Norway,France,GROUP_STAGE
+I6,Senegal,Iraq,GROUP_STAGE
+J1,Argentina,Algeria,GROUP_STAGE
+J2,Austria,Jordan,GROUP_STAGE
+J3,Argentina,Austria,GROUP_STAGE
+J4,Jordan,Algeria,GROUP_STAGE
+J5,Algeria,Austria,GROUP_STAGE
+J6,Jordan,Argentina,GROUP_STAGE
+K1,Portugal,Congo DR,GROUP_STAGE
+K2,Uzbekistan,Colombia,GROUP_STAGE
+K3,Portugal,Uzbekistan,GROUP_STAGE
+K4,Colombia,Congo DR,GROUP_STAGE
+K5,Colombia,Portugal,GROUP_STAGE
+K6,Congo DR,Uzbekistan,GROUP_STAGE
+L1,England,Croatia,GROUP_STAGE
+L2,Ghana,Panama,GROUP_STAGE
+L3,England,Ghana,GROUP_STAGE
+L4,Panama,Croatia,GROUP_STAGE
+L5,Croatia,Ghana,GROUP_STAGE
+L6,Panama,England,GROUP_STAGE
+DF1,-,-,LAST_32
+DF2,-,-,LAST_32
+DF3,-,-,LAST_32
+DF4,-,-,LAST_32
+DF5,-,-,LAST_32
+DF6,-,-,LAST_32
+DF7,-,-,LAST_32
+DF8,-,-,LAST_32
+DF9,-,-,LAST_32
+DF10,-,-,LAST_32
+DF11,-,-,LAST_32
+DF12,-,-,LAST_32
+DF13,-,-,LAST_32
+DF14,-,-,LAST_32
+DF15,-,-,LAST_32
+DF16,-,-,LAST_32
+OF1,-,-,LAST_16
+OF2,-,-,LAST_16
+OF3,-,-,LAST_16
+OF4,-,-,LAST_16
+OF5,-,-,LAST_16
+OF6,-,-,LAST_16
+OF7,-,-,LAST_16
+OF8,-,-,LAST_16
+QF1,-,-,QUARTER_FINALS
+QF2,-,-,QUARTER_FINALS
+QF3,-,-,QUARTER_FINALS
+QF4,-,-,QUARTER_FINALS
+SF1,-,-,SEMI_FINALS
+SF2,-,-,SEMI_FINALS
+TP,-,-,THIRD_PLACE
+GF,-,-,FINAL
