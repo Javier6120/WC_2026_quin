@@ -26,8 +26,8 @@ col2.metric("Líder", leaderboard_df.iloc[0]["nombre"])
 
 # Predictions by participant
 pred_df = pd.read_sql("""SELECT date, name AS nombre, forms_match_id as id,
-                                home_team || ' vs ' || away_team AS partido, 
-                                spa_pred AS predicción, outcome AS resultado, points AS puntos 
+                                spa_home_team || ' vs ' || spa_away_team AS partido, 
+                                spa_pred AS predicción, spa_outcome AS resultado, points AS puntos 
                                 FROM scored
                                 ORDER BY date""",engine)
 pred_df['date'] = (pd.to_datetime(pred_df['date'], utc=True)
@@ -41,14 +41,19 @@ st.dataframe(participant_predictions, hide_index=True, use_container_width=True)
 
 # Map of correct predictions
 heatmap_df = pd.read_sql("""SELECT name AS participante,
-                                forms_match_id as id, points,  
-                                CASE WHEN eng_pred = home_team THEN 'L'
-                                     WHEN eng_pred = away_team THEN 'V'
-                                     WHEN eng_pred = 'Draw' THEN 'E' 
-                                     END AS prediccion
-                            FROM scored""",engine)
+                                forms_match_id as id, points as puntos,  
+                                CASE WHEN spa_pred = spa_home_team THEN 'L'
+                                     WHEN spa_pred = spa_away_team THEN 'V'
+                                     WHEN spa_pred = 'Empate' THEN 'E' 
+                                     END AS prediccion, date
+                            FROM scored
+                            ORDER BY date""",engine).drop(columns=['date'])
+
+match_order = heatmap_df['id'].unique()
+heatmap_df['id']=pd.Categorical(heatmap_df['id'], categories=match_order, ordered=True)
+
 pivot_values = heatmap_df.pivot(index='participante',columns='id', values='prediccion')
-pivot_colors = heatmap_df.pivot(index='participante',columns='id', values='points')
+pivot_colors = heatmap_df.pivot(index='participante',columns='id', values='puntos')
 
 # Green color for correct predictions 
 def color_cell(val):

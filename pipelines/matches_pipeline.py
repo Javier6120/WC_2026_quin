@@ -27,9 +27,10 @@ def extract():
     CSV File (contains match_id used in google forms).
 
     Returns:
-        api_matches_df, file_matches_df
+        api_matches_df, file_matches_df, teams_df
             - pandas.Dataframe: Matches Api Data
             - pandas.Dataframe: Matches CSV Data
+            - pandas.Dataframe: Teams CSV Data
 
     """
     # Request data from API
@@ -40,10 +41,13 @@ def extract():
 
     # Reads CSV with matches
     file_matches_df = pd.read_csv(DATA_DIR/'wc_matches.csv')
-    return api_matches_df, file_matches_df
+    # Reads CSV with names ids and eng/spa names
+    teams_df = pd.read_csv(DATA_DIR/'wc_teams.csv')
+
+    return api_matches_df, file_matches_df, teams_df
 
 
-def transform(api_matches_df, file_matches_df):
+def transform(api_matches_df, file_matches_df, teams_df):
     """
     Filters matches of group stage, sets column names 
     and merges API results and CSV results. 
@@ -64,19 +68,30 @@ def transform(api_matches_df, file_matches_df):
     api_matches_df.rename(columns={'id':'api_match_id', 'score.winner':'result','utcDate':'date'}, inplace=True)
 
     # Inner Join 
-    matches_df = pd.merge(file_matches_df, api_matches_df, 
+    matches_df = (pd.merge(file_matches_df, api_matches_df, 
                           left_on=['home_team', 'away_team','stage'], 
                           right_on=['homeTeam.name', 'awayTeam.name','stage'], how='inner')
-    
-    matches_df.drop(columns=['homeTeam.name','awayTeam.name'],inplace=True)
+                          .drop(columns=['homeTeam.name','awayTeam.name']))
 
+    matches_df_ids = (pd.merge(matches_df, teams_df[['team_id','eng_team']],
+                          left_on=['home_team'], 
+                          right_on=['eng_team'], how='left')
+                          .drop(columns=['eng_team','home_team'])
+                          .rename(columns={'team_id':'home_team_id'}))
+    
+    matches_df_ids = (pd.merge(matches_df_ids, teams_df[['team_id','eng_team']],
+                          left_on=['away_team'], 
+                          right_on=['eng_team'], how='left')
+                          .drop(columns=['eng_team','away_team'])
+                          .rename(columns={'team_id':'away_team_id'}))
+    
     # Leave only unregistered matches
     existing = pd.read_sql("SELECT forms_match_id FROM matches",engine)['forms_match_id']
-    new_matches_df = matches_df[~matches_df['forms_match_id'].isin(existing)]
+    new_matches_df = matches_df_ids[~matches_df_ids['forms_match_id'].isin(existing)]
     return new_matches_df
 
 
-def load(DF):
+def load(matches_df, teams_df):
     """
     Load transformed match data into PostgreSQL.
     Writes the prepared dataset to 'matches' table.
@@ -86,15 +101,22 @@ def load(DF):
             - pandas.Dataframe: Cleaned and transformed dataset.
 
     """
-    print(f'Loading:{DF['forms_match_id']}')
-    DF.to_sql(name='matches',
+    if len(pd.read_sql("SELECT * FROM teams",engine))==0:
+        print('Loading teams_df')
+        teams_df.to_sql(name='teams',
+                        con=engine,
+                        if_exists = 'append',
+                        index=False)
+    
+    print(f'Loading matches_df')
+    matches_df.to_sql(name='matches',
               con= engine,
               if_exists = 'append',
               index= False)
-
-api_matches_df, file_matches_df = extract()
+        
+api_matches_df, file_matches_df, teams_df = extract()
 print(f'Succesfull extraction: {len(api_matches_df)} matches')
-matches_df = transform(api_matches_df, file_matches_df)
+matches_df = transform(api_matches_df, file_matches_df, teams_df)
 print(f'Matches to load: {len(matches_df)} matches')
-load(matches_df)
+load(matches_df,teams_df)
 

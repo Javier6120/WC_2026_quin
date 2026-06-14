@@ -18,8 +18,8 @@ def extract():
     predictions_DF = pd.DataFrame(form_entries['values'][1:], columns=form_entries['values'][0])
 
     # Read CSV with team names translations (eng-spa)
-    translation_df = pd.read_csv(DATA_DIR/'wc_teams.csv')
-    return predictions_DF,translation_df
+    teams_df = pd.read_sql("SELECT * FROM teams",engine)
+    return predictions_DF,teams_df
 
 
 def transform(predictions_df, teams_df):
@@ -30,16 +30,19 @@ def transform(predictions_df, teams_df):
     predictions_df['Nombre'] = predictions_df['Nombre'].replace(name_map_dict)
     predictions_df.rename(columns={'Nombre':'participant'}, inplace=True)
     predictions_df.drop(columns=['Marca temporal'],inplace=True)
-
+    
     # Melt columns to forms_match_id
     predictions_df = predictions_df.melt(id_vars='participant',
                                          var_name='forms_match_id',
                                          value_name='pred')
+    # Fix name error from google form
+    predictions_df['pred'] = predictions_df['pred'].replace('Bosnia Herzegovina','Bosnia Herzegobina')
+    
     predictions_df = pd.merge(predictions_df,teams_df,
                               left_on='pred',
                               right_on='spa_team',
-                              how='left').drop(columns=['spa_team'])
-   
+                              how='left').drop(columns=['spa_team','team_id'])
+
     predictions_df['eng_team'] = predictions_df['eng_team'].fillna('Draw')
     predictions_df.rename(columns={'eng_team':'eng_pred', 'pred':'spa_pred'}, inplace=True)
 

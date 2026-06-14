@@ -18,7 +18,8 @@ def transform(to_update_list):
         try:
             response = requests.get(f"https://api.football-data.org/v4/matches/{i}", headers=token)
             json_data = response.json()
-            updated_list.append([i,json_data['score']['winner']])
+            if json_data['status']== 'FINISHED':
+                updated_list.append([i,json_data['score']['winner']])
         except: pass
     print(f"IDs to update: {update_list}")
     return updated_list

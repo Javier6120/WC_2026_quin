@@ -1,50 +1,49 @@
-eng_team,spa_team
-Mexico,Mexico
-South Korea,Corea del Sur
-Czechia,Republica Checa
-South Africa,Sudafrica
-Canada,Canada
-Qatar,Catar
-Switzerland,Suiza
-Bosnia-Herzegovina,Bosnia Herzegobina
-Bosnia-Herzegovina,Bosnia Herzegovina
-Brazil,Brasil
-Haiti,Haiti
-Scotland,Escocia
-Morocco,Marruecos
-United States,Estados Unidos
-Australia,Australia
-Turkey,Turquia
-Paraguay,Paraguay
-Germany,Alemania
-Ivory Coast,Costa de Marfil
-Ecuador,Ecuador
-Curaçao,Curazao
-Netherlands,Holanda
-Sweden,Suecia
-Tunisia,Tunez
-Japan,Japon
-Belgium,Belgica
-Iran,Iran
-New Zealand,Nueva Zelanda
-Egypt,Egipto
-Spain,España
-Saudi Arabia,Arabia Saudi
-Uruguay,Uruguay
-Cape Verde Islands,Cabo Verde
-France,Francia
-Iraq,Irak
-Norway,Noruega
-Senegal,Senegal
-Argentina,Argentina
-Austria,Austria
-Jordan,Jordania
-Algeria,Argelia
-Portugal,Portugal
-Uzbekistan,Uzbekistan
-Colombia,Colombia
-Congo DR,Congo
-England,Inglaterra
-Ghana,Ghana
-Panama,Panama
-Croatia,Croacia
+team_id,eng_team,spa_team
+TA1,Mexico,Mexico
+TA2,South Africa,Sudafrica
+TA3,South Korea,Corea del Sur
+TA4,Czechia,Republica Checa
+TB1,Canada,Canada
+TB2,Bosnia-Herzegovina,Bosnia Herzegobina
+TB3,Qatar,Catar
+TB4,Switzerland,Suiza
+TC1,Brazil,Brasil
+TC2,Morocco,Marruecos
+TC3,Haiti,Haiti
+TC4,Scotland,Escocia
+TD1,United States,Estados Unidos
+TD2,Paraguay,Paraguay
+TD3,Australia,Australia
+TD4,Turkey,Turquia
+TE1,Germany,Alemania
+TE2,Curaçao,Curazao
+TE3,Ivory Coast,Costa de Marfil
+TE4,Ecuador,Ecuador
+TF1,Netherlands,Holanda
+TF2,Japan,Japon
+TF3,Sweden,Suecia
+TF4,Tunisia,Tunez
+TG1,Belgium,Belgica
+TG2,Egypt,Egipto
+TG3,Iran,Iran
+TG4,New Zealand,Nueva Zelanda
+TH1,Spain,España
+TH2,Cape Verde Islands,Cabo Verde
+TH3,Saudi Arabia,Arabia Saudi
+TH4,Uruguay,Uruguay
+TI1,France,Francia
+TI2,Senegal,Senegal
+TI3,Iraq,Irak
+TI4,Norway,Noruega
+TJ1,Argentina,Argentina
+TJ2,Algeria,Argelia
+TJ3,Austria,Austria
+TJ4,Jordan,Jordania
+TK1,Portugal,Portugal
+TK2,Congo DR,Congo
+TK3,Uzbekistan,Uzbekistan
+TK4,Colombia,Colombia
+TL1,England,Inglaterra
+TL2,Croatia,Croacia
+TL3,Ghana,Ghana
+TL4,Panama,Panama

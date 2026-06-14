@@ -3,24 +3,31 @@ from database import engine
 
 def transform():
      q1 = '''  WITH outcomes AS(
-               SELECT forms_match_id, home_team, away_team, date,
-                     CASE WHEN result = 'DRAW' THEN 'Draw'
-                     WHEN result = 'HOME_TEAM' THEN home_team
-                     WHEN result = 'AWAY_TEAM' THEN away_team
-                     ELSE NULL END AS outcome
-               FROM matches),
-
-               pointed AS(
-                    SELECT out.forms_match_id, participant_id, home_team, away_team,
-                           eng_pred,spa_pred, date, outcome,
-                           CASE WHEN eng_pred = outcome THEN 1
-                                ELSE 0 END AS points
-                    FROM predictions as pred 
-                    LEFT JOIN outcomes as out 
-                    ON pred.forms_match_id = out.forms_match_id)
-
-               SELECT p.forms_match_id, p.participant_id, name, home_team, away_team, 
-                      eng_pred, spa_pred, outcome, points, date
+                         SELECT forms_match_id, 
+                              t.spa_team AS spa_home_team, 
+                              tt.spa_team AS spa_away_team, date,
+                              CASE WHEN result = 'DRAW' THEN 'Empate'
+                                   WHEN result = 'HOME_TEAM' THEN t.spa_team
+                                   WHEN result = 'AWAY_TEAM' THEN tt.spa_team
+                                   ELSE NULL END AS spa_outcome		
+                         FROM matches as m
+                         LEFT JOIN teams as t
+                         ON m.home_team_id = t.team_id
+                         LEFT JOIN teams as tt
+                         ON m.away_team_id = tt.team_id),
+	          pointed AS (
+                         SELECT out.forms_match_id, participant_id, 
+                               spa_home_team, spa_away_team,
+                               spa_pred, date, spa_outcome,
+                               CASE WHEN spa_pred = spa_outcome THEN 1
+                                    ELSE 0 END AS points
+                         FROM predictions as pred 
+                         LEFT JOIN outcomes as out 
+                         ON pred.forms_match_id = out.forms_match_id)
+	
+               SELECT p.forms_match_id, p.participant_id, 
+                      name, spa_home_team, spa_away_team, 
+                      spa_pred, spa_outcome, points, date
                FROM pointed as p
                LEFT JOIN participants AS part 
                ON p.participant_id = part.participant_id
