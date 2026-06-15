@@ -1,3 +1,18 @@
+"""
+update_scores.py
+
+Selects past matches without registered result 
+and request results from Football API.
+
+Filters finished matches and update data in matches table.
+
+Source: 
+    Football API 
+
+Target Tables:
+    matches (Neon DB)
+
+"""
 import pandas as pd 
 import sqlalchemy, requests
 from database import engine
@@ -11,7 +26,20 @@ def to_update():
      to_update = pd.read_sql(q1,engine)
      return(to_update['ids'].tolist())
 
-def transform(to_update_list):
+def extract(to_update_list):
+    """
+    Extracts data from each match in list 
+    and appends succesfull requests with finished status. 
+
+    Args: 
+        to_update_list
+            - List: API IDs from past matches without registered result.
+
+    Returns:
+        updated_list
+            - List[List]: List of IDs and result pairs.
+    
+    """
     updated_list = []
     token = {'X-Auth-Token':token_1}
     for i in to_update_list:
@@ -25,6 +53,14 @@ def transform(to_update_list):
     return updated_list
 
 def load(updated_list):
+    """
+    LoaUpdates matches table with obtained results in list. 
+
+    Args: 
+        updated_list
+            - List[List]: List of [ID,result].
+    
+    """
     update_q = sqlalchemy.text(''' UPDATE matches 
                                    SET result =:res
                                    WHERE api_match_id = :id''')
@@ -33,6 +69,9 @@ def load(updated_list):
             conn.execute(update_q, {'res':pair[1], 'id':pair[0]})
     print(f"Updated: {updated_list}")
 
+# Requiered data
 update_list = to_update()
-updated_list = transform(update_list)
+# Extract 
+updated_list = extract(update_list)
+# Load/Update
 load(updated_list)

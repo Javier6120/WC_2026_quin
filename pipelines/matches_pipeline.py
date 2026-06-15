@@ -2,19 +2,24 @@
 matches_pipeline.py 
 
 ETL pipeline responsible for loading the World Cup match
-schedule into PostgreSQL.
+schedule and teams table into PostgreSQL(Neon DB).
 
-Requests match schedule from API Football and CSV file. 
+Request match schedule from API Football.
 
-Performs cleaning and transformation, and stores the data in 
+Load CSV data, teams tables (ID, english/spanish names) 
+and matches with IDs used in google forms.
+
+Performs cleaning, transform dataset, and stores in 
 PostgreSQL.
 
 Source: 
-    wc_matches.csv 
+    wc_matches.csv
+    wc_teams.csv
     Football API 
 
-Target Table:
-    matches
+Target Tables:
+    matches (Neon DB)
+    teams (Neon DB)
 """
 
 import pandas as pd, sqlalchemy, requests
@@ -24,7 +29,7 @@ from config import token_1, DATA_DIR
 def extract():
     """
     Extract matches data from Football API and 
-    CSV File (contains match_id used in google forms).
+    CSV Files.
 
     Returns:
         api_matches_df, file_matches_df, teams_df
@@ -49,18 +54,20 @@ def extract():
 
 def transform(api_matches_df, file_matches_df, teams_df):
     """
-    Filters matches of group stage, sets column names 
-    and merges API results and CSV results. 
     Prepares dataset for loading into PostgreSQL.
-
+    Selects and renames columns.
+    Merges to add teams IDs to matches.
+    
     Args:
         api_matches_df 
             - pandas.Dataframe: Matches Api Data
         file_matches_df
             - pandas.Dataframe: Matches CSV Data
+        teams_df
+            - pandas.Dataframe: Teams CSV Data
 
     Returns: 
-        matches_df
+        new_matches_df
             - pandas.Dataframe: Cleaned and transformed dataset.
 
     """
@@ -94,11 +101,13 @@ def transform(api_matches_df, file_matches_df, teams_df):
 def load(matches_df, teams_df):
     """
     Load transformed match data into PostgreSQL.
-    Writes the prepared dataset to 'matches' table.
+    Writes the prepared datasets to 'matches' and 'teams' tables.
 
     Args: 
         matches_df
             - pandas.Dataframe: Cleaned and transformed dataset.
+        teams_df
+            - pandas.Dataframe: Teams CSV data
 
     """
     if len(pd.read_sql("SELECT * FROM teams",engine))==0:
@@ -113,10 +122,14 @@ def load(matches_df, teams_df):
               con= engine,
               if_exists = 'append',
               index= False)
-        
+
+# Extract
 api_matches_df, file_matches_df, teams_df = extract()
 print(f'Succesfull extraction: {len(api_matches_df)} matches')
+# Transform
 matches_df = transform(api_matches_df, file_matches_df, teams_df)
 print(f'Matches to load: {len(matches_df)} matches')
+# Load
 load(matches_df,teams_df)
+print('Loaded succesfully')
 

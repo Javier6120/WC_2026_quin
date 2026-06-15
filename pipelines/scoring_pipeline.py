@@ -1,7 +1,36 @@
+"""
+scoring_pipeline.py
+
+ETL pipeline responsible for scoring correct predictions and 
+loading scored dataset and leaderboard into PostgreSQL(Neon DB).
+
+Uses SQL query to load and transform data and 
+loads scored datasets into database.
+
+Source:
+     matches, predictions, teams, participants (Neon DB)
+
+Target Tables:
+     leaderboard (Neon DB)
+     scored (Neon DB)
+
+"""
+
 import pandas as pd
 from database import engine
 
 def transform():
+     """
+     Queries data from PostgreSQL, scoring correct predictions. 
+     Generates leaderboard using pandas transformations. 
+
+     Returns:
+          scored_df
+               - pandas.Dataframe: Scored dataset.
+          leaderboard_df
+               - pandas.Dataframe: Leaderboard
+          
+     """
      q1 = '''  WITH outcomes AS(
                          SELECT forms_match_id, 
                               t.spa_team AS spa_home_team, 
@@ -34,14 +63,31 @@ def transform():
                ORDER BY p.participant_id ASC;'''
      
      scored_df = pd.read_sql(q1,engine)
+
+     # Generate leaderboard
      leaderboard_df = scored_df.groupby(['participant_id','name'],as_index=False).agg(total_points=('points','sum'))
      leaderboard_df = leaderboard_df.sort_values('total_points',ascending=False).drop(columns=['participant_id'])
      return scored_df, leaderboard_df
 
 def load(scored, lb):
+    """
+    Load transformed match data into PostgreSQL into new tables. 
+
+    Args: 
+        scored
+            - pandas.Dataframe: Scored dataset.
+        lb
+            - pandas.Dataframe: Leaderboard
+
+    """
+    print(f'Loading leaderboard')
     lb.to_sql(name='leaderboard', con= engine, if_exists = 'replace', index= False)
+    print(f'Loading scored data')
     scored.to_sql(name='scored', con= engine, if_exists = 'replace', index= False)
 
 pd.set_option('display.max_rows',None)
+# Transform
 scored_df,LB_df = transform()
+# Load
 load(scored_df,LB_df)
+print('Loaded succesfully')

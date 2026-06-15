@@ -15,7 +15,7 @@ db_password = os.getenv("DB_PASSWORD")
 token_1 = os.getenv("API_TOKEN_FOOTBALL")
 sheet_id = os.getenv("SHEET_ID")
 
-# Name mappinp dictionary
+# Name mapping dictionary
 name_map = json.loads(os.getenv("NAME_MAP"))
 
 # Path Settings
