@@ -60,4 +60,5 @@ def color_cell(val):
     if val==1: return 'background-color: lightgreen'
     return ''
 styled = pivot_values.style.apply(lambda x: pivot_colors.map(color_cell), axis=None)
+st.subheader(f" ✅ Predicciones correctas")
 st.dataframe(styled)
