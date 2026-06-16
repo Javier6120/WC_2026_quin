@@ -25,12 +25,12 @@ col2.metric("Líder", leaderboard_df.iloc[0]["nombre"])
 
 
 # Predictions by participant
-pred_df = pd.read_sql("""SELECT date, name AS nombre, forms_match_id as id,
+pred_df = pd.read_sql("""SELECT date AS fecha, name AS nombre, forms_match_id as id,
                                 spa_home_team || ' vs ' || spa_away_team AS partido, 
                                 spa_pred AS predicción, spa_outcome AS resultado, points AS puntos 
                                 FROM scored
                                 ORDER BY date""",engine)
-pred_df['date'] = (pd.to_datetime(pred_df['date'], utc=True)
+pred_df['fecha'] = (pd.to_datetime(pred_df['fecha'], utc=True)
                    .dt.tz_convert("America/Mexico_City")
                    .dt.strftime("%Y-%m-%d  |  %H:%M"))
 participant = st.selectbox("Selecciona un participante", sorted(pred_df["nombre"].unique()))
