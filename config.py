@@ -14,6 +14,7 @@ db_password = os.getenv("DB_PASSWORD")
 # API Token / Google Sheets Info
 token_1 = os.getenv("API_TOKEN_FOOTBALL")
 sheet_id = os.getenv("SHEET_ID")
+sheet_ko = os.getenv("SHEET_KO")
 
 # Name mapping dictionary
 name_map = json.loads(os.getenv("NAME_MAP"))

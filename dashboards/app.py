@@ -34,12 +34,17 @@ pred_df['fecha'] = (pd.to_datetime(pred_df['fecha'], utc=True)
                    .dt.tz_convert("America/Mexico_City")
                    .dt.strftime("%Y-%m-%d  |  %H:%M"))
 participant = st.selectbox("Selecciona un participante", sorted(pred_df["nombre"].unique()))
-participant_predictions = pred_df[pred_df["nombre"] == participant]
+phase = st.selectbox("Selecciona una fase", ['Grupos','Partidos de Eliminación'])
+if phase=='Grupos':
+    participant_predictions = pred_df[pred_df["nombre"] == participant].iloc[:72,:]
+else: 
+    participant_predictions = pred_df[pred_df["nombre"] == participant].iloc[72:,:]
+
 st.subheader(f"⚽ Predicciones de {participant}")
-st.dataframe(participant_predictions, hide_index=True, use_container_width=True)
+st.dataframe(participant_predictions, hide_index=True, width='stretch')
 
 
-# Map of correct predictions
+# Maps of correct predictions
 heatmap_df = pd.read_sql("""SELECT name AS participante,
                                 forms_match_id as id, points as puntos,  
                                 CASE WHEN spa_pred = spa_home_team THEN 'L'
@@ -59,6 +64,13 @@ pivot_colors = heatmap_df.pivot(index='participante',columns='id', values='punto
 def color_cell(val):
     if val==1: return 'background-color: lightgreen'
     return ''
-styled = pivot_values.style.apply(lambda x: pivot_colors.map(color_cell), axis=None)
-st.subheader(f" ✅ Predicciones correctas")
+
+# Group Matches
+styled = pivot_values.loc[:,:'J6'].style.apply(lambda x: pivot_colors.loc[:,:'J6'].map(color_cell), axis=None)
+st.subheader(f" ✅ Aciertos Fase de Grupos")
 st.dataframe(styled)
+
+# Elimination Matches
+styled2 = pivot_values.loc[:,'DF1':].style.apply(lambda x: pivot_colors.loc[:,'DF1':].map(color_cell), axis=None)
+st.subheader(f" ✅ Aciertos Fase de Eliminacion")
+st.dataframe(styled2)

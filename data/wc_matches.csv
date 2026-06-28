@@ -71,22 +71,22 @@ L3,England,Ghana,GROUP_STAGE
 L4,Panama,Croatia,GROUP_STAGE
 L5,Croatia,Ghana,GROUP_STAGE
 L6,Panama,England,GROUP_STAGE
-DF1,-,-,LAST_32
-DF2,-,-,LAST_32
-DF3,-,-,LAST_32
-DF4,-,-,LAST_32
-DF5,-,-,LAST_32
-DF6,-,-,LAST_32
-DF7,-,-,LAST_32
-DF8,-,-,LAST_32
-DF9,-,-,LAST_32
-DF10,-,-,LAST_32
-DF11,-,-,LAST_32
-DF12,-,-,LAST_32
-DF13,-,-,LAST_32
-DF14,-,-,LAST_32
-DF15,-,-,LAST_32
-DF16,-,-,LAST_32
+DF1,South Africa,Canada,LAST_32
+DF2,Brazil,Japan,LAST_32
+DF3,Germany,Paraguay,LAST_32
+DF4,Netherlands,Morocco,LAST_32
+DF5,Ivory Coast,Norway,LAST_32
+DF6,France,Sweden,LAST_32
+DF7,Mexico,Ecuador,LAST_32
+DF8,England,Congo DR,LAST_32
+DF9,Belgium,Senegal,LAST_32
+DF10,United States,Bosnia-Herzegovina,LAST_32
+DF11,Spain,Austria,LAST_32
+DF12,Portugal,Croatia,LAST_32
+DF13,Switzerland,Algeria,LAST_32
+DF14,Australia,Egypt,LAST_32
+DF15,Argentina,Cape Verde Islands,LAST_32
+DF16,Colombia,Ghana,LAST_32
 OF1,-,-,LAST_16
 OF2,-,-,LAST_16
 OF3,-,-,LAST_16

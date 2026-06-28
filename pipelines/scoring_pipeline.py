@@ -52,7 +52,8 @@ def transform():
                                     ELSE 0 END AS points
                          FROM predictions as pred 
                          LEFT JOIN outcomes as out 
-                         ON pred.forms_match_id = out.forms_match_id)
+                         ON pred.forms_match_id = out.forms_match_id
+                         WHERE spa_pred <> 'Pendiente')
 	
                SELECT p.forms_match_id, p.participant_id, 
                       name, spa_home_team, spa_away_team, 
@@ -60,7 +61,7 @@ def transform():
                FROM pointed as p
                LEFT JOIN participants AS part 
                ON p.participant_id = part.participant_id
-               ORDER BY p.participant_id ASC;'''
+               ORDER BY p.participant_id ASC, date ASC;'''
      
      scored_df = pd.read_sql(q1,engine)
 
