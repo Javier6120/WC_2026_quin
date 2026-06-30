@@ -34,7 +34,7 @@ pred_df['fecha'] = (pd.to_datetime(pred_df['fecha'], utc=True)
                    .dt.tz_convert("America/Mexico_City")
                    .dt.strftime("%Y-%m-%d  |  %H:%M"))
 participant = st.selectbox("Selecciona un participante", sorted(pred_df["nombre"].unique()))
-phase = st.selectbox("Selecciona una fase", ['Grupos','Partidos de Eliminación'])
+phase = st.selectbox("Selecciona una fase", ['Partidos de Eliminación','Grupos'])
 if phase=='Grupos':
     participant_predictions = pred_df[pred_df["nombre"] == participant].iloc[:72,:]
 else: 
@@ -65,12 +65,12 @@ def color_cell(val):
     if val==1: return 'background-color: lightgreen'
     return ''
 
-# Group Matches
-styled = pivot_values.loc[:,:'J6'].style.apply(lambda x: pivot_colors.loc[:,:'J6'].map(color_cell), axis=None)
-st.subheader(f" ✅ Aciertos Fase de Grupos")
-st.dataframe(styled)
-
 # Elimination Matches
 styled2 = pivot_values.loc[:,'DF1':].style.apply(lambda x: pivot_colors.loc[:,'DF1':].map(color_cell), axis=None)
 st.subheader(f" ✅ Aciertos Fase de Eliminacion")
 st.dataframe(styled2)
+
+# Group Matches
+styled = pivot_values.loc[:,:'J6'].style.apply(lambda x: pivot_colors.loc[:,:'J6'].map(color_cell), axis=None)
+st.subheader(f" ✅ Aciertos Fase de Grupos")
+st.dataframe(styled)

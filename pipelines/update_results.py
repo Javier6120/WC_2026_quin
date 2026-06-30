@@ -46,8 +46,14 @@ def extract(to_update_list):
         try:
             response = requests.get(f"https://api.football-data.org/v4/matches/{i}", headers=token)
             json_data = response.json()
-            if json_data['status']== 'FINISHED':
-                updated_list.append([i,json_data['score']['winner']])
+            if json_data['status']=='FINISHED':
+                if json_data['score']['duration']!= 'PENALTY_SHOOTOUT':
+                    updated_list.append([i,json_data['score']['winner']])
+                else:
+                    if json_data['score']['fullTime']['home']>json_data['score']['fullTime']['away']:
+                        updated_list.append([i,'HOME_TEAM'])
+                    elif json_data['score']['fullTime']['home']<json_data['score']['fullTime']['away']:
+                        updated_list.append([i,'AWAY_TEAM'])
         except: pass
     print(f"IDs to update: {update_list}")
     return updated_list
