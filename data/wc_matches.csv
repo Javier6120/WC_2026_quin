@@ -87,14 +87,14 @@ DF13,Switzerland,Algeria,LAST_32
 DF14,Australia,Egypt,LAST_32
 DF15,Argentina,Cape Verde Islands,LAST_32
 DF16,Colombia,Ghana,LAST_32
-OF1,-,-,LAST_16
-OF2,-,-,LAST_16
-OF3,-,-,LAST_16
-OF4,-,-,LAST_16
-OF5,-,-,LAST_16
-OF6,-,-,LAST_16
-OF7,-,-,LAST_16
-OF8,-,-,LAST_16
+OF1,Canada,Morocco,LAST_16
+OF2,Paraguay,France,LAST_16
+OF3,Brazil,Norway,LAST_16
+OF4,Mexico,England,LAST_16
+OF5,Portugal,Spain,LAST_16
+OF6,United States,Belgium,LAST_16
+OF7,Argentina,Egypt,LAST_16
+OF8,Switzerland,Colombia,LAST_16
 QF1,-,-,QUARTER_FINALS
 QF2,-,-,QUARTER_FINALS
 QF3,-,-,QUARTER_FINALS
