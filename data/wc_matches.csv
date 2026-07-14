@@ -95,11 +95,11 @@ OF5,Portugal,Spain,LAST_16
 OF6,United States,Belgium,LAST_16
 OF7,Argentina,Egypt,LAST_16
 OF8,Switzerland,Colombia,LAST_16
-QF1,-,-,QUARTER_FINALS
-QF2,-,-,QUARTER_FINALS
-QF3,-,-,QUARTER_FINALS
-QF4,-,-,QUARTER_FINALS
-SF1,-,-,SEMI_FINALS
-SF2,-,-,SEMI_FINALS
+QF1,France,Morocco,QUARTER_FINALS
+QF2,Spain,Belgium,QUARTER_FINALS
+QF3,Norway,England,QUARTER_FINALS
+QF4,Argentina,Switzerland,QUARTER_FINALS
+SF1,France,Spain,SEMI_FINALS
+SF2,England,Argentina,SEMI_FINALS
 TP,-,-,THIRD_PLACE
 GF,-,-,FINAL
